@@ -10,13 +10,13 @@ const { spaceId, accessToken } = process.env;
 
 module.exports = {
   siteMetadata: {
-    title: 'gatsby-starter-typescript-plus',
-    description: 'A starter kit for TypeScript-based Gatsby projects with sensible defaults.',
-    siteUrl: 'https://gatsby-starter-typescript-plus.netlify.com',
+    title: 'Space IV',
+    description: 'A space for creative, super-fast, scalable, and bespoke user experiences.',
+    siteUrl: 'https://space-iv.com',
     author: {
-      name: 'Resi Respati',
-      url: 'https://twitter.com/resir014',
-      email: 'resir014@gmail.com'
+      name: 'Space IV',
+      url: 'https://space-iv.com/',
+      email: 'human@space-iv.com'
     }
   },
   plugins: [

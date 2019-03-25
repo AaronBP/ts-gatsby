@@ -5,9 +5,9 @@ import { StaticQuery, graphql } from 'gatsby'
 import 'modern-normalize'
 import '../styles/normalize'
 
-import Header from '../components/Header'
 import LayoutRoot from '../components/LayoutRoot'
 import LayoutMain from '../components/LayoutMain'
+import SpaceForHeader from '../components/SpaceForHeader'
 
 type StaticQueryProps = {
   site: {
@@ -33,13 +33,13 @@ const IndexLayout: React.SFC = ({ children }) => (
     render={(data: StaticQueryProps) => (
       <LayoutRoot>
         <Helmet
-          title={data.site.siteMetadata.title}
+          title={`${data.site.siteMetadata.title} - Home`}
           meta={[
             { name: 'description', content: data.site.siteMetadata.description },
             { name: 'keywords', content: 'gatsbyjs, gatsby, javascript, sample, something' }
           ]}
         />
-        <Header title={data.site.siteMetadata.title} />
+        <SpaceForHeader />
         <LayoutMain>{children}</LayoutMain>
       </LayoutRoot>
     )}

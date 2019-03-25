@@ -1,14 +1,14 @@
 /* tslint:disable:max-line-length */
 
 export const colors = {
-  brand: '#663399',
-  lilac: '#9d7cbf',
-  accent: '#ffb238',
-  success: '#37b635',
-  warning: '#ec1818',
+  brand: '#58E6FF',
+  lilac: '#9d7cbf', //
+  accent: '#FF9F4F',
+  success: '#37b635', //
+  warning: '#FF9F4F',
   ui: {
     bright: '#e0d6eb',
-    light: '#f5f3f7',
+    light: '#ECFCFF', //
     whisper: '#fbfafc'
   },
   code: '#fcf6f0',
@@ -17,14 +17,13 @@ export const colors = {
     copy: 'hsla(270, 15.797828016000002%, 0%, 0.88)',
     calm: 'rgba(0, 0, 0, 0.54)'
   },
-  white: '#fff',
-  black: '#000'
+  white: '#ECFCFF', //
+  black: '#000' //
 }
 
 export const fonts = {
-  sansSerif:
-    '-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif',
-  serif: 'Georgia, "Times New Roman", Times, serif',
+  sansSerif: '"Helvetica Neue", "Roboto", Arial, sans-serif',
+  serif: '"Times New Roman", Times, serif',
   monospace: 'Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace, monospace'
 }
 
@@ -37,29 +36,29 @@ export const breakpoints = {
 }
 
 export const widths = {
-  md: 720,
-  lg: 960,
-  xl: 1140
+  md: 500,
+  lg: 750,
+  xl: 900
 }
 
 export const dimensions = {
   fontSize: {
-    regular: 16,
-    large: 18
+    regular: 12,
+    large: 16
   },
   headingSizes: {
-    h1: 2.441,
-    h2: 1.953,
-    h3: 1.563,
+    h1: 2.66667,
+    h2: 11.33334,
+    h3: 5.33334,
     h4: 1.25
   },
   lineHeight: {
-    regular: 1.45,
-    heading: 1.2
+    regular: 1.125,
+    heading: 1.125
   },
   containerPadding: 1.5
 }
 
 export const heights = {
-  header: 60
+  header: 100
 }
