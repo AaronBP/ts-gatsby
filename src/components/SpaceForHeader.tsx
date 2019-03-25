@@ -65,19 +65,33 @@ interface Edge {
 
 interface Node {
   name: string
+  media: any
+  index: number
 }
 
 interface State {
-  selected: string
+  selected: HeaderItem
   showBackground: boolean
+}
+
+interface HeaderItem {
+  index: number
+  word: string
+  image: string
 }
 
 export const HomeHeaderQuery = graphql`
   query homeHeader {
-    allContentfulHomeHeader {
+    allContentfulHomeHeader(sort: { fields: index }) {
       edges {
         node {
           name
+          index
+          media {
+            sizes(maxWidth: 1280) {
+              ...GatsbyContentfulSizes
+            }
+          }
         }
       }
     }
@@ -85,32 +99,34 @@ export const HomeHeaderQuery = graphql`
 `
 
 class SpaceForHeader extends React.Component<Props, State> {
-  keywords: string[] = []
-  state: Readonly<State> = {
-    selected: this.keywords[0],
-    showBackground: false
-  }
+  items: HeaderItem[] = []
 
   constructor(props: Props) {
     super(props)
-    console.log(props)
-    this.keywords = props.data.edges.map((edge: Edge) => {
-      console.log(edge)
-      return edge.node.name
+    this.items = props.data.edges.map((edge: Edge) => {
+      return {
+        index: edge.node.index,
+        word: edge.node.name,
+        image: edge.node.media.sizes.base64
+      }
     })
-    console.log(this.keywords)
+    this.state = {
+      selected: this.items[0],
+      showBackground: false
+    }
+    console.log(this.items, this.state)
   }
 
   handleClick = () => {
-    this.setState({ selected: this.getNextKeyword() })
+    this.setState({ selected: this.getNextHeaderItem() })
   }
 
-  getNextKeyword(): string {
-    let index = this.keywords.indexOf(this.state.selected) + 1
-    if (index === this.keywords.length) {
+  getNextHeaderItem(): HeaderItem {
+    let index = this.state.selected.index + 1
+    if (index === this.items.length) {
       index = 0
     }
-    return this.keywords[index]
+    return this.items[index]
   }
 
   hideBackground = () => {
@@ -123,37 +139,24 @@ class SpaceForHeader extends React.Component<Props, State> {
 
   render() {
     return (
-      // <StaticQuery
-      //   query={HomeHeaderQuery}
-      //   render={({ allContentfulHomeHeader: { edges } }) => {
-      //     // console.log(edges)
-      //     let headerKeywords: string[] = []
-      //     for (const header of edges) {
-      //       // console.log(header)
-      //       headerKeywords.push(header.node.name)
-      //     }
-
-      //     return <h1>hi</h1>
-      //   }}
-      // />
-      // <StyledHeader>
-      //   <HeaderTop>
-      <a href="/">
-        <LogoSVG />
-      </a>
-      //     <MenuSVG />
-      //   </HeaderTop>
-      //   <HeaderInner>
-      //     <HeaderTitle onMouseEnter={this.hideBackground} onMouseLeave={this.showBackground}>
-      //       A space iv{' '}
-      //       <KeywordClick onClick={this.handleClick}>
-      //         {this.state.selected} <ClickAnimation />
-      //       </KeywordClick>{' '}
-      //       <br />
-      //       web experiences.
-      //     </HeaderTitle>
-      //   </HeaderInner>
-      // </StyledHeader>
+      <StyledHeader>
+        <HeaderTop>
+          <a href="/">
+            <LogoSVG />
+          </a>
+          <MenuSVG />
+        </HeaderTop>
+        <HeaderInner>
+          <HeaderTitle onMouseEnter={this.hideBackground} onMouseLeave={this.showBackground}>
+            A space iv{' '}
+            <KeywordClick onClick={this.handleClick}>
+              {this.state.selected.word} <ClickAnimation />
+            </KeywordClick>{' '}
+            <br />
+            web experiences.
+          </HeaderTitle>
+        </HeaderInner>
+      </StyledHeader>
     )
   }
 }
@@ -161,5 +164,3 @@ class SpaceForHeader extends React.Component<Props, State> {
 export default () => (
   <StaticQuery query={HomeHeaderQuery} render={({ allContentfulHomeHeader }) => <SpaceForHeader data={allContentfulHomeHeader} />} />
 )
-
-// export default SpaceForHeader
