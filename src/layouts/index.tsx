@@ -10,6 +10,7 @@ import LayoutMain from '../components/LayoutMain'
 import SpaceForHeader from '../components/SpaceForHeader'
 import Menu from '../components/Menu'
 import TopMenu from '../components/TopMenu'
+import ScrollBar from '../components/ScrollBar'
 
 type StaticQueryProps = {
   site: {
@@ -66,6 +67,7 @@ class IndexLayout extends React.Component<Props, State> {
             <TopMenu menuIsOpen={false} onClick={this.onToggleMenu} />
             <SpaceForHeader />
             <LayoutMain>{this.props.children}</LayoutMain>
+            <ScrollBar />
           </LayoutRoot>
         )}
       />

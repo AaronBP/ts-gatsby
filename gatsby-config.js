@@ -1,12 +1,10 @@
 'use strict'
 
 require('dotenv').config({
-  path: `.env.${process.env.ENVIRONMENT}`
+  path: `.env.${process.env.NODE_ENV}`
 })
 
 const { spaceId, accessToken } = process.env
-
-console.log(spaceId, accessToken)
 
 module.exports = {
   siteMetadata: {

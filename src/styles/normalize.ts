@@ -54,6 +54,11 @@ export default `
     background: black;
   }
 
+  body::-webkit-scrollbar {
+    display: none;
+    scrollbar-width: none;
+  }
+
   a {
     color: ${colors.brand};
     text-decoration: none;
