@@ -1,11 +1,11 @@
 import * as React from 'react'
 import styled from '@emotion/styled'
+import * as Img from 'gatsby-image'
 
 import { heights, colors } from '../styles/variables'
 import Container from './Container'
-import { MenuSVG } from '../content/icons/Menu'
-import { LogoSVG } from '../content/icons/Logo'
-import { StaticQuery, graphql, useStaticQuery } from 'gatsby'
+import { StaticQuery, graphql } from 'gatsby'
+import LineAnimationText from './LineAnimationText'
 
 const StyledHeader = styled.header`
   height: ${heights.header}vh;
@@ -15,16 +15,6 @@ const StyledHeader = styled.header`
   position: relative;
   background-position: center;
   background-size: cover;
-`
-
-const HeaderTop = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: 50px 50px;
-  position: absolute;
-  width: 100%;
 `
 
 const HeaderInner = styled(Container)`
@@ -39,19 +29,28 @@ const HeaderTitle = styled.h1`
   font-size: 48px;
   text-transform: none;
   font-weight: normal;
-  line-height: 118px;
+  line-height: 88px;
 `
 
 const KeywordClick = styled.span`
   position: relative;
   display: inline-block;
   line-height: 80px;
+  cursor: pointer;
 `
 
-const ClickAnimation = styled.span`
-  display: block;
-  border-bottom: 1px solid ${colors.white};
-`
+interface State {
+  selected: HeaderItem
+  showBackground: boolean
+  hasClicked: boolean
+  isHovering: boolean
+}
+
+interface HeaderItem {
+  index: number
+  word: string
+  image: any
+}
 
 interface Props {
   data: {
@@ -69,17 +68,6 @@ interface Node {
   index: number
 }
 
-interface State {
-  selected: HeaderItem
-  showBackground: boolean
-}
-
-interface HeaderItem {
-  index: number
-  word: string
-  image: string
-}
-
 export const HomeHeaderQuery = graphql`
   query homeHeader {
     allContentfulHomeHeader(sort: { fields: index }) {
@@ -88,7 +76,7 @@ export const HomeHeaderQuery = graphql`
           name
           index
           media {
-            sizes(maxWidth: 1280) {
+            sizes(quality: 100) {
               ...GatsbyContentfulSizes
             }
           }
@@ -107,14 +95,15 @@ class SpaceForHeader extends React.Component<Props, State> {
       return {
         index: edge.node.index,
         word: edge.node.name,
-        image: edge.node.media.sizes.base64
+        image: edge.node.media.sizes
       }
     })
     this.state = {
-      selected: this.items[0],
-      showBackground: false
+      selected: this.items[1],
+      showBackground: false,
+      hasClicked: false,
+      isHovering: false
     }
-    console.log(this.items, this.state)
   }
 
   handleClick = () => {
@@ -134,23 +123,21 @@ class SpaceForHeader extends React.Component<Props, State> {
   }
 
   showBackground = () => {
-    this.setState({ showBackground: false })
+    this.setState({ showBackground: true })
   }
 
   render() {
     return (
       <StyledHeader>
-        <HeaderTop>
-          <a href="/">
-            <LogoSVG />
-          </a>
-          <MenuSVG />
-        </HeaderTop>
+        <Img.default
+          sizes={this.state.selected.image}
+          style={{ display: this.state.showBackground ? 'block' : 'none', position: 'absolute', width: '100%', height: '100%' }}
+        />
         <HeaderInner>
-          <HeaderTitle onMouseEnter={this.hideBackground} onMouseLeave={this.showBackground}>
+          <HeaderTitle>
             A space iv{' '}
-            <KeywordClick onClick={this.handleClick}>
-              {this.state.selected.word} <ClickAnimation />
+            <KeywordClick onClick={this.handleClick} onMouseEnter={this.showBackground} onMouseLeave={this.hideBackground}>
+              <LineAnimationText text={this.state.selected.word} />
             </KeywordClick>{' '}
             <br />
             web experiences.

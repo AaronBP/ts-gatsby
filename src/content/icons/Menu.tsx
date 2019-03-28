@@ -1,6 +1,13 @@
-export const MenuSVG = () => {
+export const MenuSVG: React.FunctionComponent = () => {
   return (
-    <svg width="41px" height="15px" viewBox="0 0 41 15" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width="41px"
+      height="15px"
+      viewBox="0 0 41 15"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
+    >
       <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd" strokeLinecap="square">
         <g id="Contact-#1---Desktop-HD" transform="translate(-1350.000000, -69.000000)" stroke="#FFFFFF" strokeWidth="2">
           <g id="Menu" transform="translate(1351.000000, 70.000000)">

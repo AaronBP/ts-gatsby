@@ -3,8 +3,8 @@ import styled from '@emotion/styled'
 
 import { heights, colors } from '../styles/variables'
 import Container from './Container'
-import { MenuSVG } from '../content/icons/Menu'
-import { LogoSVG } from '../content/icons/Logo'
+import TopMenu from './TopMenu'
+import Menu from './Menu'
 
 const StyledHeader = styled.header`
   height: ${heights.header}vh;
@@ -12,16 +12,6 @@ const StyledHeader = styled.header`
   background-color: ${colors.black};
   color: ${colors.white};
   position: relative;
-`
-
-const HeaderTop = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: 50px 50px;
-  position: absolute;
-  width: 100%;
 `
 
 const HeaderInner = styled(Container)`
@@ -36,18 +26,33 @@ interface HeaderProps {
   title: string
 }
 
-const Header: React.SFC<HeaderProps> = ({ title }) => (
-  <StyledHeader>
-    <HeaderTop>
-      <a href="/">
-        <LogoSVG />
-      </a>
-      <MenuSVG />
-    </HeaderTop>
-    <HeaderInner>
-      <h1>{title}</h1>
-    </HeaderInner>
-  </StyledHeader>
-)
+interface State {
+  menuIsOpen: boolean
+}
 
+class Header extends React.Component<HeaderProps, State> {
+  constructor(props: HeaderProps) {
+    super(props)
+    console.log('hello')
+    this.state = {
+      menuIsOpen: false
+    }
+  }
+  onToggleMenu = (isActive: boolean) => {
+    this.setState({ menuIsOpen: isActive })
+    console.log('toggle menu')
+  }
+  render() {
+    const menuElement = this.state.menuIsOpen ? <Menu onClick={this.onToggleMenu} /> : null
+    return (
+      <StyledHeader>
+        <TopMenu menuIsOpen={false} onClick={this.onToggleMenu} />
+        <HeaderInner>
+          <h1>{this.props.title}</h1>
+        </HeaderInner>
+        {menuElement}
+      </StyledHeader>
+    )
+  }
+}
 export default Header

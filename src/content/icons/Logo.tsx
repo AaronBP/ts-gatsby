@@ -1,8 +1,15 @@
 export const LogoSVG = () => {
   return (
-    <svg width="125px" height="57px" viewBox="0 0 125 57" version="1.1" xmlns="http://www.w3.org/2000/svg">
-      <title>Logo</title>
-      <desc>Created with Sketch.</desc>
+    <svg
+      width="125px"
+      height="57px"
+      viewBox="0 0 125 57"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
+    >
+      <title>Space IV Logo</title>
+      <desc>Space IV logo.</desc>
       <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
         <g id="Contact-#1---Desktop-HD" transform="translate(-50.000000, -50.000000)" fill="#FFFFFF">
           <g id="Logo" transform="translate(50.000000, 50.000000)">

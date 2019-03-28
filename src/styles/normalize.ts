@@ -1,7 +1,31 @@
 import { dimensions, fonts, colors, breakpoints } from './variables'
 import { getEmSize } from './mixins'
+import * as Helveticattf from '../fonts/helvetica-neue/HelveticaNeue.ttf'
+import * as HelveticaLightttf from '../fonts/helvetica-neue/HelveticaNeue-Light.ttf'
+import * as HelveticaLightItalicttf from '../fonts/helvetica-neue/HelveticaNeueLightItalic.ttf'
 
 export default `
+  @font-face {
+    font-family: "Helvetica Neue";
+    src: url(${Helveticattf}) format("truetype"),
+    font-weight: 400;
+	  font-style: normal;
+  }
+
+  @font-face {
+    font-family: "Helvetica Neue";
+    src: url(${HelveticaLightttf}) format("truetype");
+    font-weight: 200;
+	  font-style: normal;
+  }
+
+  @font-face {
+    font-family: "Helvetica Neue";
+    src: url(${HelveticaLightItalicttf}) format("truetype");
+    font-weight: 200;
+	  font-style: italic;
+  }
+
   html {
     box-sizing: border-box;
   }
@@ -22,10 +46,12 @@ export default `
     overflow-x: hidden;
     overflow-y: scroll;
     font-family: ${fonts.sansSerif};
+    font-weight: 200;
     color: ${colors.black};
     background-color: ${colors.white};
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
+    background: black;
   }
 
   a {
@@ -90,6 +116,7 @@ export default `
     font-weight: 600;
     line-height: ${dimensions.lineHeight.heading};
     text-rendering: optimizeLegibility;
+    font-family: ${fonts.serif};
   }
 
   h1 {
