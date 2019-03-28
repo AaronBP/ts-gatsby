@@ -1,10 +1,8 @@
 'use strict'
 
-const dotenv = require('dotenv')
-
-if (process.env.ENVIRONMENT !== 'production') {
-  dotenv.config()
-}
+require('dotenv').config({
+  path: `.env.${process.env.ENVIRONMENT}`
+})
 
 const { spaceId, accessToken } = process.env
 
