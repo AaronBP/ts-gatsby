@@ -1,12 +1,14 @@
 'use strict'
 
-const dotenv = require("dotenv");
+const dotenv = require('dotenv')
 
-if (process.env.ENVIRONMENT !== "production") {
-  dotenv.config();
+if (process.env.ENVIRONMENT !== 'production') {
+  dotenv.config()
 }
 
-const { spaceId, accessToken } = process.env;
+const { spaceId, accessToken } = process.env
+
+console.log(spaceId, accessToken)
 
 module.exports = {
   siteMetadata: {
@@ -21,10 +23,10 @@ module.exports = {
   },
   plugins: [
     {
-      resolve: "gatsby-source-contentful",
+      resolve: 'gatsby-source-contentful',
       options: {
-        spaceId,
-        accessToken
+        spaceId: spaceId,
+        accessToken: accessToken
       }
     },
     {
